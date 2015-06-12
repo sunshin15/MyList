@@ -154,8 +154,7 @@ void MyList<T>::erase(int start, int end)
 	}
 	for (int i=start;i<len-end+start-1;i++)
 		a[i]=a[i+end-start+1];
-	//for (int i=len-end+start-1;i<len;i++)
-	//	a[i]=nullItem;//同上：nullItem是什么?
+
 	len-=end-start+1;
 }
 
@@ -370,7 +369,7 @@ int main(){
 		a += 12; // a = [15, 4, 2, 1, 0, 12]
 		for (i=0; i<a.get_size(); ++i)
 			cout<<a[i]<<endl;
-		b = a.get_item(4, -3); // b = [] * if start > end，return []
+		b = a.get_item(4, -3); // b = [] * if start > end ,return []
 		b = a.get_item(3, -1); // b = [1, 0, 12] 
 		a += b; // a = [15, 4, 2, 1, 0, 12, 1, 0, 12]
 		for (i=0; i<a.get_size(); ++i)
