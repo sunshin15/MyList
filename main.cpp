@@ -56,6 +56,47 @@ public:
 	~MyList(){delete [] a;}
 };
 
+int main(){
+
+	try{
+		MyList<int> a, b;
+	
+		int i;
+		for (i=0; i<5; ++i)
+			a.push(i);
+	
+		// a = [0, 1, 2, 3, 4]
+		a[3] = 15; // a = [0, 1, 2, 15, 4]
+		a.sort(); // a = [0, 1, 2, 4, 15]
+		a.reverse(); // a = [15, 4, 2, 1, 0]
+		a += 12; // a = [15, 4, 2, 1, 0, 12]
+		for (i=0; i<a.get_size(); ++i)
+			cout<<a[i]<<endl;
+		b = a.get_item(4, -3); // b = [] * if start > end ,return []
+		b = a.get_item(3, -1); // b = [1, 0, 12] 
+		a += b; // a = [15, 4, 2, 1, 0, 12, 1, 0, 12]
+		for (i=0; i<a.get_size(); ++i)
+			cout<<a.get_item(i)<<endl;
+		cout<<a.count(5)<<endl;
+		b.clean(); // b = []
+		cout<<b.get_size()<<endl;
+		a.erase(2, 5); 
+		b = a + a; 
+		b.insert(3, 116); 
+		b.remove(4); 
+		MyList<double> c(10, 3.14);
+		for (i=0; i<100; ++i)
+			c.push(1.1*i);
+		cout<<c.get_item(100, 105)<<endl;
+	}
+	catch(empty){cout<<"Error:The list is already empty!"<<endl;}
+	catch(errorIndex){cout<<"Error:The index out of range!"<<endl;}
+	return 0;
+}
+
+
+
+//functions~~
 template<class T>
 void MyList<T>::double_space()
 {
@@ -353,40 +394,3 @@ void MyList<T>::reverse()
 	}
 }
 
-int main(){
-
-	try{
-		MyList<int> a, b;
-	
-		int i;
-		for (i=0; i<5; ++i)
-			a.push(i);
-	
-		// a = [0, 1, 2, 3, 4]
-		a[3] = 15; // a = [0, 1, 2, 15, 4]
-		a.sort(); // a = [0, 1, 2, 4, 15]
-		a.reverse(); // a = [15, 4, 2, 1, 0]
-		a += 12; // a = [15, 4, 2, 1, 0, 12]
-		for (i=0; i<a.get_size(); ++i)
-			cout<<a[i]<<endl;
-		b = a.get_item(4, -3); // b = [] * if start > end ,return []
-		b = a.get_item(3, -1); // b = [1, 0, 12] 
-		a += b; // a = [15, 4, 2, 1, 0, 12, 1, 0, 12]
-		for (i=0; i<a.get_size(); ++i)
-			cout<<a.get_item(i)<<endl;
-		cout<<a.count(5)<<endl;
-		b.clean(); // b = []
-		cout<<b.get_size()<<endl;
-		a.erase(2, 5); 
-		b = a + a; 
-		b.insert(3, 116); 
-		b.remove(4); 
-		MyList<double> c(10, 3.14);
-		for (i=0; i<100; ++i)
-			c.push(1.1*i);
-		cout<<c.get_item(100, 105)<<endl;
-	}
-	catch(empty){cout<<"Error:The list is already empty!"<<endl;}
-	catch(errorIndex){cout<<"Error:The index out of range!"<<endl;}
-	return 0;
-}
